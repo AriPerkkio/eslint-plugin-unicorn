@@ -13,7 +13,7 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - run: yarn install
-    - run: yarn link
-    - run: yarn link eslint-plugin-unicorn
-    - run: yarn smoke
+    - run: npm install
+    - run: npm link
+    - run: npm link eslint-plugin-unicorn
+    - run: npm run smoke
