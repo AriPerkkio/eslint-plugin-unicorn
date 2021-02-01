@@ -1,0 +1,24 @@
+name: Compare PR
+
+on:
+  issue_comment:
+    types: [created, edited]
+
+jobs:
+  compare:
+    runs-on: ubuntu-latest
+    if: contains(github.event.comment.body, '@github-actions eslint-remote-tester compare')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: 14
+      - uses: AriPerkkio/eslint-remote-tester-compare-action@fix/repo-init-cmd
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          allowed-associations: '["OWNER", "COLLABORATOR"]'
+          eslint-remote-tester-config: test/compare-pr/eslint-remote-tester.config.js
+          repository-initialize-command: |
+            npm install
+            npm link
+            npm link eslint-plugin-unicorn
