@@ -16,4 +16,8 @@ jobs:
     - run: npm install
     - run: npm link
     - run: npm link eslint-plugin-unicorn
-    - run: npm run smoke
+    - uses: AriPerkkio/eslint-remote-tester-run-action@master
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-title: "Results of weekly scheduled smoke test"
+        eslint-remote-tester-config: test/smoke/eslint-remote-tester.config.js
