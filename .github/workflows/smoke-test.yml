@@ -13,10 +13,11 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: 14
-    - run: npm install
-    - run: npm link
-    - run: npm link eslint-plugin-unicorn
-    - uses: AriPerkkio/eslint-remote-tester-run-action@master
+    - run: |
+        npm install
+        npm link
+        npm link eslint-plugin-unicorn
+    - uses: AriPerkkio/eslint-remote-tester-run-action@v1
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }}
         issue-title: "Results of weekly scheduled smoke test"
